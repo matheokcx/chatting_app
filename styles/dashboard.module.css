@@ -1,0 +1,159 @@
+.corps {
+    background: linear-gradient(to top left, rgb(14, 14, 79), rgb(39, 4, 58));
+    width: 100%;
+    height: 720px;
+    display: flex;
+    font-family: sans-serif;
+}
+
+.conversations {
+    width: 30%;
+    height: 100%;
+    border-radius: 0 18px 18px 0;
+    background-color: rgb(58, 56, 204);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+}
+
+.bottom {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    bottom: 10%;
+    position: absolute;
+}
+
+.disconnectButton {
+    width: 130px;
+    height: 35px;
+    border-radius: 12px;
+    border-width: 0;
+    background-color: rgb(216, 85, 85);
+    color: white;
+    transition: 2s;
+}
+
+.disconnectButton:hover {
+    transform: translateY(-15px);
+    background-color: rgb(253, 46, 46);
+    cursor: pointer;
+}
+
+.rightPart {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.affichage {
+    width: 100%;
+    height: 570px;
+    background-color: rgb(58, 58, 58);
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.otherSide {
+    width: 50%;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.userSide {
+    width: 50%;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    justify-content: right;
+}
+
+.message {
+    margin-top: 15px;
+    background-color: white;
+    background-size: cover;
+    width: fit-content;
+    color: black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.addConv {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.addConv input[type='text'] {
+    width: 80%;
+    height: 28px;
+    border-radius: 12px;
+    background-color: white;
+    border-width: 0;
+    padding: 5px;
+    color: black;
+}
+
+.addConv button {
+    width: 15%;
+    height: 28px;
+    border-radius: 12px;
+    background-color: white;
+    border-width: 0;
+    padding: 5px;
+    color: black;
+}
+
+.userSide p {
+    margin-left: 50%;
+}
+
+.controls {
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-color: rgb(28, 28, 28);
+}
+
+.controls input[type="text"] {
+    width: 65%;
+    height: 28px;
+    border-radius: 15px;
+    background-color: white;
+    padding: 4px;
+    color: black;
+}
+
+.controls button {
+    width: 10%;
+    height: 28px;
+    background-color: white;
+    border-radius: 15px;
+    border-width: 0;
+    color: black;
+}
