@@ -1,74 +1,82 @@
 import style from '../styles/dashboard.module.css'
 import Conversation from '../components/Conversation'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export default function Dashboard() {
 
     const routeur = useRouter()
-    const [convs, setConvs] = useState([])
-    const [currentIndex, setCurrentIndex] = useState(null)
-    const [inputText, setInputText] = useState("")
-    const [messages, setMessages] = useState([])
-    const [otherMessages, setOtherMessages] = useState([])
-    const [newConvUser, setNewConvUser] = useState("")
-    const monMail = routeur.query.monMail
+    const userMail = routeur.query.mail
 
-    const disconnect = () => routeur.push("/")
+    const [userConversations, setUserConversations] = useState([])
+    const [conversationChoisit, setConversationChoisit] = useState(null)
+
+    const [messagesUtilisateur, setMessagesUtilisateur] = useState([])
+    const [messagesAutre, setMessagesAutre] = useState([])
+
+    const [texteEntre, setTexteEntre] = useState("")
+    const [utilisateurAajouter, setUtilisateurAajouter] = useState("")
+
+    const deconnexion = () => routeur.push("/")
+
+    // Raccourcis requêtes API ____________________________________________________________________________________________________________
 
     const fetchConversations = async () => {
-        const response = await fetch(`/api/user?userMail=${monMail}`);
-        const data = await response.json();
-        setConvs(data);
+        const response = await fetch(`/api/gestionConversation?userMail=${userMail}`)
+        const data = await response.json()
+        setUserConversations(data)
     }
 
-    const fetchMessages = async (convIndex) => {
-        const response = await fetch(`/api/messages?currentConv=${convIndex}&currentUser=${monMail}`);
-        const data = await response.json();
-        setMessages(data);
+    const fetchMessages = async () => {
+        const response = await fetch(`/api/loadUserMessages?currentConv=${conversationChoisit}&currentUser=${userMail}`)
+        const data = await response.json()
+        setMessagesUtilisateur(data)
     }
 
     const fetchOtherMessages = async () => {
-        const response = await fetch(`/api/otherMessages?&userMail=${monMail}&otherMail=${convs[currentIndex]}`);
-        const data = await response.json();
-        setOtherMessages(data);
+        const response = await fetch(`/api/loadOtherMessages?&userMail=${userMail}&otherMail=${userConversations[conversationChoisit]}`)
+        const data = await response.json()
+        setMessagesAutre(data)
     }
 
-    useEffect(() => {
-        if (monMail) {
-            fetchConversations();
-        }
-    }, [monMail]);
+    // UseEffect() ________________________________________________________________________________________________________________________
 
     useEffect(() => {
-        if (convs.length > 0) {
-            setCurrentIndex(0);
+        if (userMail) {
+            fetchConversations()
         }
-    }, [convs]);
+    }, [userMail])
 
     useEffect(() => {
-        if (currentIndex !== null) {
-            fetchMessages(currentIndex);
-            fetchOtherMessages();
+        if (userConversations.length > 0) {
+            setConversationChoisit(0)
         }
-    }, [currentIndex]);
+    }, [userConversations])
+
+    useEffect(() => {
+        if (conversationChoisit !== null) {
+            fetchMessages(conversationChoisit)
+            fetchOtherMessages()
+        }
+    }, [conversationChoisit])
+
+    // Fonctions utiles ___________________________________________________________________________________________________________________
 
     const envoitMessage = async () => {
-        await fetch(`/api/envoit`, {
+        await fetch(`/api/envoitMessage`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userMail: monMail,
-                currentId: currentIndex,
-                inputValue: inputText
+                userMail: userMail,
+                currentId: conversationChoisit,
+                inputValue: texteEntre
             })
-        });
+        })
 
-        if (currentIndex !== null && monMail) {
-            fetchMessages(currentIndex);
-        }
+        await fetchMessages(conversationChoisit)
     }
 
     const ajouterConversation = async () => {
@@ -78,37 +86,42 @@ export default function Dashboard() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userMail: monMail,
-                otherMail: newConvUser
+                userMail: userMail,
+                otherMail: utilisateurAajouter
             })
-        });
+        })
 
-        await fetchConversations(); // Refetch les conversations après l'ajout
+        await fetchConversations()
     }
 
     return (
         <>
+            <Head>
+                <title>Chatting App - Disscussion</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className={style.corps}>
                 <div className={style.conversations}>
                     <div className={style.addConv}>
-                        <input type="text" value={newConvUser} onChange={(e) => setNewConvUser(e.target.value)} placeholder="Nom d'utilisateur" />
+                        <input type="text" value={utilisateurAajouter} onChange={(e) => setUtilisateurAajouter(e.target.value)} placeholder="Nom d'utilisateur" />
                         <button onClick={() => ajouterConversation()}>Ajouter</button>
                     </div>
-                    {convs.map((name, index) => (
-                        <Conversation key={index} userName={name} current={index === currentIndex} setCurrent={() => setCurrentIndex(index)} />
+                    {userConversations.map((name, index) => (
+                        <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} />
                     ))}
-                    <div className={style.bottom}>
-                        <button className={style.disconnectButton} onClick={() => disconnect()}>LogOut</button>
+                    <div className={style.conversation_bottom}>
+                        <button className={style.disconnectButton} onClick={() => deconnexion()}>LogOut</button>
                     </div>
                 </div>
                 <div className={style.rightPart}>
-                    <div className={style.affichage}>
-                        <div className={style.otherSide}>{otherMessages.map((text, index) => <p key={index} className={style.message}>{text} </p>)}</div>
-                        <div className={style.userSide}>{messages.map((value, index) => <p key={index} className={style.message}>{value} </p>)}</div>
+                    <div className={style.affichageMessage}>
+                        <div className={style.otherSide}>{messagesAutre.map((text, index) => <p key={index} className={style.message}>{text} </p>)}</div>
+                        <div className={style.userSide}>{messagesUtilisateur.map((value, index) => <p key={index} className={style.message}>{value} </p>)}</div>
                     </div>
                     <div className={style.controls}>
-                        <input type="text" placeholder="Ecrivez votre message" value={inputText} onChange={(e) => setInputText(e.target.value)} />
-                        <button onClick={() => envoitMessage()}>send</button>
+                        <input type="text" placeholder="Ecrivez votre message" value={texteEntre} onChange={(e) => setTexteEntre(e.target.value)} />
+                        <button onClick={() => envoitMessage()}>Envoyer</button>
                     </div>
                 </div>
             </div>

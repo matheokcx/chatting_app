@@ -1,8 +1,33 @@
+@keyframes arrivee_messages_utilisateur {
+    0% {
+        opacity: 0;
+        margin-left: 500px;
+    }
+
+    100% {
+        opacity: 100%;
+        margin-left: 55%
+    }
+}
+
+@keyframes arrivee_messages_autre_utilisateur {
+    0% {
+        opacity: 0;
+        margin-right: 500px;
+    }
+
+    100% {
+        opacity: 100%;
+        margin-right: 0;
+    }
+}
+
 .corps {
-    background: linear-gradient(to top left, rgb(14, 14, 79), rgb(39, 4, 58));
-    width: 100%;
-    height: 720px;
+    background-color: rgb(14, 14, 79);
+    width: 100vw;
+    height: 100vh;
     display: flex;
+    flex-direction: row;
     font-family: sans-serif;
 }
 
@@ -10,88 +35,13 @@
     width: 30%;
     height: 100%;
     border-radius: 0 18px 18px 0;
-    background-color: rgb(58, 56, 204);
+    border-right: 3px rgba(255, 255, 255, 0.596) solid;
+    background-color: rgb(18, 18, 103);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 25px;
-}
-
-.bottom {
-    height: 10%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    bottom: 10%;
-    position: absolute;
-}
-
-.disconnectButton {
-    width: 130px;
-    height: 35px;
-    border-radius: 12px;
-    border-width: 0;
-    background-color: rgb(216, 85, 85);
-    color: white;
-    transition: 2s;
-}
-
-.disconnectButton:hover {
-    transform: translateY(-15px);
-    background-color: rgb(253, 46, 46);
-    cursor: pointer;
-}
-
-.rightPart {
-    width: 70%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.affichage {
-    width: 100%;
-    height: 570px;
-    background-color: rgb(58, 58, 58);
-    display: flex;
-    flex-direction: row;
-    padding: 15px;
-}
-
-.otherSide {
-    width: 50%;
-    height: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-}
-
-.userSide {
-    width: 50%;
-    height: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    justify-content: right;
-}
-
-.message {
-    margin-top: 15px;
-    background-color: white;
-    background-size: cover;
-    width: fit-content;
-    color: black;
-    border-radius: 10px;
-    padding: 5px;
+    overflow: hidden;
 }
 
 .addConv {
@@ -123,37 +73,139 @@
     border-width: 0;
     padding: 5px;
     color: black;
+    transition: 0.5s;
+}
+
+.addConv button:active {
+    background-color: green;
+    color: white;
+}
+
+.conversation_bottom {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    bottom: 5%;
+    position: absolute;
+}
+
+.disconnectButton {
+    width: 130px;
+    height: 35px;
+    border-radius: 12px;
+    border-width: 0;
+    background-color: rgb(216, 85, 85);
+    color: white;
+    transition: 2s;
+}
+
+.disconnectButton:hover {
+    transform: translateY(-8px);
+    background-color: rgb(253, 46, 46);
+    cursor: pointer;
+}
+
+.rightPart {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.affichageMessage {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.otherSide {
+    width: 50%;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding-left: 5px;
+}
+
+.userSide {
+    width: 50%;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin-top: 18px;
+    background-color: white;
+    width: fit-content;
+    color: rgb(36, 36, 36);
+    border-radius: 10px;
+    padding: 8px;
 }
 
 .userSide p {
-    margin-left: 50%;
+    margin-left: 55%;
+    animation-name: arrivee_messages_utilisateur;
+    animation-delay: 0;
+    animation-duration: 2s;
+}
+
+.otherSide p {
+    animation-name: arrivee_messages_autre_utilisateur;
+    animation-delay: 0;
+    animation-duration: 2s;
 }
 
 .controls {
-    height: 150px;
+    height: 15%;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 25px;
-    background-color: rgb(28, 28, 28);
 }
 
 .controls input[type="text"] {
     width: 65%;
-    height: 28px;
-    border-radius: 15px;
+    height: 32px;
+    border-radius: 12px;
+    border-width: 0;
     background-color: white;
-    padding: 4px;
-    color: black;
+    padding: 5px;
+    color: rgb(39, 39, 39);
 }
 
 .controls button {
-    width: 10%;
-    height: 28px;
+    width: 6%;
+    height: 32px;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 12px;
     border-width: 0;
-    color: black;
+    color: rgb(32, 32, 32);
+    font-weight: bold;
+    opacity: 68%;
+    transition: 2s;
+}
+
+.controls button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    opacity: 100%;
+}
+
+.controls button:active {
+    transform: translateX(18px);
 }
