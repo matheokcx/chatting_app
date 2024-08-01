@@ -15,13 +15,13 @@ export default function Conversation({ userName, current, setCurrent }) {
     return (
         <>
             {current ? (
-                <div className={style.currentBox}>
+                <div className={`${style['currentBox']} flex flex-row gap-10 items-center w-full h-1/10 pl-6 mt-3`}>
                     <Image src="/pp.png" alt="profil picture" width="70" height="70" />
                     <p><strong>{userName}</strong></p>
                     <button onClick={() => estChoisit()}>fermer</button>
                 </div >
             ) :
-                (<div className={style.box}>
+                (<div className={`${style['box']} flex flex-row gap-10 items-center w-full h-1/10 pl-6 mt-3`}>
                     <Image src="/pp.png" alt="profil picture" width="70" height="70" />
                     <p><strong>{userName}</strong></p>
                     <button onClick={() => estChoisit()}>voir</button>

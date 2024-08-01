@@ -70,9 +70,9 @@ export default function Dashboard() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userMail: userMail,
-                currentId: conversationChoisit,
-                inputValue: texteEntre
+                mail: userMail,
+                identifiantCnversationActuel: conversationChoisit,
+                texteMessage: texteEntre
             })
         })
 
@@ -99,28 +99,28 @@ export default function Dashboard() {
             <Head>
                 <title>Chatting App - Disscussion</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/icon.png" />
             </Head>
-            <div className={style.corps}>
-                <div className={style.conversations}>
-                    <div className={style.addConv}>
-                        <input type="text" value={utilisateurAajouter} onChange={(e) => setUtilisateurAajouter(e.target.value)} placeholder="Nom d'utilisateur" />
+            <div className='bg-blue-950 w-screnn h-screen flex flex-row font-sans'>
+                <div className={`${style['conversations']} w-1/3 h-full bg-blue-800 flex flex-col items-center pt-6 overflow-hidden gap-4`}>
+                    <div className={`${style['addConv']} w-full h-1/10 flex gap-4 p-4`}>
+                        <input type="text" value={utilisateurAajouter} className='w-4/5 h-7 rounded-xl bg-white border-0 p-1 text-black' onChange={(e) => setUtilisateurAajouter(e.target.value)} placeholder="Nom d'utilisateur" />
                         <button onClick={() => ajouterConversation()}>Ajouter</button>
                     </div>
                     {userConversations.map((name, index) => (
                         <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} />
                     ))}
-                    <div className={style.conversation_bottom}>
-                        <button className={style.disconnectButton} onClick={() => deconnexion()}>LogOut</button>
+                    <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-4 absolute`}>
+                        <button className={`${style['disconnectButton']} w-32 h-9 border-width rounded-xl border-0 bg-red-400 text-white`} onClick={() => deconnexion()}>LogOut</button>
                     </div>
                 </div>
-                <div className={style.rightPart}>
-                    <div className={style.affichageMessage}>
-                        <div className={style.otherSide}>{messagesAutre.map((text, index) => <p key={index} className={style.message}>{text} </p>)}</div>
-                        <div className={style.userSide}>{messagesUtilisateur.map((value, index) => <p key={index} className={style.message}>{value} </p>)}</div>
+                <div className='w-4/6 h-full flex flex-col'>
+                    <div className='w-full h-5/6 flex flex-row p-4'>
+                        <div className={`${style['otherSide']} w-1/2 h-full overflow-scroll overflow-x-hidden overflow-y-auto flex flex-col justify-left pl-1`}>{messagesAutre.map((text, index) => <p key={index} className='mt-4 bg-white w-fit text-black rounded-xl p-2'>{text} </p>)}</div>
+                        <div className={`${style['userSide']} w-1/2 h-full overflow-scroll overflow-x-hidden overflow-y-auto flex flex-col`}>{messagesUtilisateur.map((value, index) => <p key={index} className='mt-4 bg-white w-fit text-black rounded-xl p-2'>{value} </p>)}</div>
                     </div>
-                    <div className={style.controls}>
-                        <input type="text" placeholder="Ecrivez votre message" value={texteEntre} onChange={(e) => setTexteEntre(e.target.value)} />
+                    <div className={`${style['controls']} h-1/6 w-full flex flex-row justify-center items-center gap-6`}>
+                        <input type="text" placeholder="Ecrivez votre message" value={texteEntre} onChange={(e) => setTexteEntre(e.target.value)} className='w-2/3 h-8 rounded-xl border-0 bg-white p-1 text-black' />
                         <button onClick={() => envoitMessage()}>Envoyer</button>
                     </div>
                 </div>
