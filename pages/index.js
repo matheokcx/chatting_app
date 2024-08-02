@@ -30,6 +30,26 @@ export default function Home() {
     }
   }
 
+  const ajouterCompte = async () => {
+    const requete = await fetch('/api/ajouterCompte', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userMail: mail,
+        userPassword: password
+      })
+    })
+    if (requete.ok) {
+      connexion()
+    }
+    else {
+      const data = await requete.json()
+      alert(data.message)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -42,7 +62,10 @@ export default function Home() {
           <h2 className='text-3xl font-bold'>LogIn</h2>
           <input type="mail" className='w-70 h-7 rounded-xl border-0 p-2 bg-white text-black' placeholder="Votre mail" onChange={(e) => setMail(e.target.value)} />
           <input type="password" className='w-70 h-7 rounded-xl border-0 p-2 bg-white text-black' placeholder="Votre mot de passe" onChange={(e) => setPassword(e.target.value)} />
-          <button onClick={() => connexion()} className={`${style['envoit']} w-36 h-10 rounded-xl bg-white text-black border-0`}><strong>Connexion</strong></button>
+          <div className='w-4/5 h-1/5 flex flex-row gap-3 justify-center items-center'>
+            <button onClick={() => connexion()} className={`${style['envoit']} w-36 h-10 rounded-xl bg-white text-black border-0`}><strong>Connexion</strong></button>
+            <button onClick={() => ajouterCompte()} className='w-36 h-10 rounded-xl bg-green-500 text-white border-0'><strong>Créer un compte</strong></button>
+          </div>
         </div>
       </div>
     </>

@@ -29,7 +29,7 @@ export default function Dashboard() {
     }
 
     const fetchMessages = async () => {
-        const response = await fetch(`/api/loadUserMessages?currentConv=${conversationChoisit}&currentUser=${userMail}`)
+        const response = await fetch(`/api/loadUserMessages?mail=${userMail}&otherMail=${userConversations[conversationChoisit]}`)
         const data = await response.json()
         setMessagesUtilisateur(data)
     }
@@ -71,16 +71,17 @@ export default function Dashboard() {
             },
             body: JSON.stringify({
                 mail: userMail,
-                identifiantCnversationActuel: conversationChoisit,
+                autreMail: userConversations[conversationChoisit],
                 texteMessage: texteEntre
             })
         })
 
         await fetchMessages(conversationChoisit)
+        setTexteEntre("")
     }
 
     const ajouterConversation = async () => {
-        await fetch(`/api/user`, {
+        await fetch(`/api/gestionConversation`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
