@@ -15,6 +15,7 @@ export default async function handler(req, res) {
             const [valeurs] = await bdd.query(`SELECT DISTINCT u.mail FROM user u JOIN conversation c ON u.idUser = c.userid2 WHERE c.userid1 = (SELECT idUser FROM user WHERE mail = ?) UNION SELECT DISTINCT u.mail FROM user u JOIN conversation c ON u.idUser = c.userid1 WHERE c.userid2 = (SELECT idUser FROM user WHERE mail = ?);`, [userMail, userMail])
 
             const userConversations = valeurs.map(row => row.mail)
+
             res.status(200).json(userConversations)
             await bdd.end()
         }
@@ -47,6 +48,7 @@ export default async function handler(req, res) {
             else {
                 res.status(405).send("La conversation existe deja ou l'autre utilisateur n'existe pas")
             }
+
             await bdd.end()
         }
         catch (e) {
