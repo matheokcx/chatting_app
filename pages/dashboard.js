@@ -31,7 +31,7 @@ export default function Dashboard() {
         setUserConversations(data)
     }
 
-    const fetchMessages = async () => {
+    const fetchMessages = async (conversationChoisit) => {
         const response = await fetch(`/api/loadUserMessages?mail=${userMail}&otherMail=${userConversations[conversationChoisit]}`)
         const data = await response.json()
         setMessagesUtilisateur(data)
@@ -138,7 +138,7 @@ export default function Dashboard() {
                             <button onClick={() => ajouterConversation()}>Ajouter</button>
                         </div>
                         {userConversations.map((name, index) => (
-                            <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} otherName={userMail} />
+                            <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} otherName={userMail} modeNuit={undefined} />
                         ))}
                         <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 absolute`}>
                             <Image src='/nightMode.png' alt='Mode nuit' onClick={() => setModeNuit(true)} width="50" height="50" />
