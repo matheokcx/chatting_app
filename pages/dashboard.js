@@ -112,7 +112,7 @@ export default function Dashboard() {
                         <button onClick={() => ajouterConversation()}>Ajouter</button>
                     </div>
                     {userConversations.map((name, index) => (
-                        <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} modeNuit={modeNuit} />
+                        <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} modeNuit={modeNuit} otherName={userConversations[conversationChoisit]} />
                     ))}
                     <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 absolute`}>
                         <Image src='/dayMode.png' alt='Mode nuit' width="50" height="50" onClick={() => setModeNuit(false)} />
@@ -138,7 +138,7 @@ export default function Dashboard() {
                             <button onClick={() => ajouterConversation()}>Ajouter</button>
                         </div>
                         {userConversations.map((name, index) => (
-                            <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} />
+                            <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} otherName={userMail} />
                         ))}
                         <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 absolute`}>
                             <Image src='/nightMode.png' alt='Mode nuit' onClick={() => setModeNuit(true)} width="50" height="50" />
