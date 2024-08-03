@@ -6,26 +6,27 @@
 
 ## Outils utilisés
 
-Tout d'abord avant de commencer la présentation de l'application, voici ma stack, elle n'est pas indispensable pour refaire un projet comme celui-ci, il y a des moyens plus simples, mais c'est ce que j'utilise le plus souvent:
+Tout d'abord avant de commencer la présentation de l'application, voici ma stack :
 
 - NextJs (Framework React)
 - TailwindCss (Frameword Css)
-- TypeScript 
-- Prisma (ORM)
+- SQL / mysql
 
 ## Structure de l'application 
 
 Pour cela, j'ai été au plus simple avec une page de connexion/inscription et une page où l'on retrouve les discussions avec d'autres utilisateurs.
 
-![](/public/logPage.png)
+![](/public/cd1.png)
 
-![](/public/homePage.png)
+![](/public/cd2.png)
 
-_Attention: Ces images datent du 1/08/24, durant la phase de développement, il se peut donc que le design ai changé ou que de nouvelles features soient apparu !_
+![](/public/cd3.png)
+
+_Attention: Ces images datent du 04/08/24, durant la phase de développement, il se peut donc que le design ai changé ou que de nouvelles features soient apparu !_
 
 ## Objectifs techniques et explication des choix
 
-Durant le développement de l'application et tout au long de ce projet, j'ai cherché à parvenir à créer quelque chose de qualitatif, en pensant tout d'abord à la légèreté du projet (uniquement 2 pages, minimum de requêtes API) ainsi qu'à la sécurité (transfère des données en arrière-plan, utilisation d'un ORM).
+Durant le développement de l'application et tout au long de ce projet, j'ai cherché à parvenir à créer quelque chose de qualitatif, en pensant tout d'abord à la légèreté du projet (uniquement 2 pages, minimum de requêtes API) ainsi qu'à la sécurité (transfère des données en arrière-plan, cryptage des mots de passes).
 
 ## Objectifs futures
 
@@ -33,7 +34,7 @@ L'application étant toujours en cours de développement, il me reste des idées
 
 - ~~Possibilité de supprimer une conversation~~ _(Fini)_
 - ~~Mode jour/nuit~~ _(Fini)_
-- Responsive mobile
+- ~~Responsive mobile~~ _(Fini)_
 - Pouvoir choisir sa photo de profil
 
 ## Récupération du code source
