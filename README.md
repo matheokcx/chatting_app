@@ -31,7 +31,7 @@ Durant le développement de l'application et tout au long de ce projet, j'ai che
 
 L'application étant toujours en cours de développement, il me reste des idées à mettre en place afin d'améliorer toujours le projet ainsi que l'expérience utilisateur. Les principales sont :
 
-- Possibilité de supprimer un message / une conversation
+- ~~Possibilité de supprimer une conversation~~ _(Fini)_
 - ~~Mode jour/nuit~~ _(Fini)_
 - Responsive mobile
 - Pouvoir choisir sa photo de profil

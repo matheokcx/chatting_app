@@ -32,7 +32,7 @@ export default function Conversation({ userName, otherName, current, setCurrent,
         <>
             {current ? (
                 <div className={`${style['currentBox']} flex flex-row gap-6 items-center w-full h-1/10 pl-6 mt-3`}>
-                    {modeNuit ? <Image src='/supprimerConversationNuit.png' width="20" height='20' onClick={() => supprimerConversation()} /> : <Image src='/supprimerConversation.png' width="20" height='20' onClick={() => supprimerConversation()} />}
+                    {modeNuit ? <Image src='/supprimerConversationNuit.png' width="20" height='20' onClick={() => supprimerConversation()} alt="bin" /> : <Image src='/supprimerConversation.png' width="20" height='20' onClick={() => supprimerConversation()} alt="bin" />}
                     <Image src="/pp.png" alt="profil picture" width="70" height="70" />
                     {modeNuit ? (<p><strong>{userName}</strong></p>) : (<p className='text-black'><strong>{userName}</strong></p>)}
                     {modeNuit ? (<button onClick={() => estChoisit()} className='w-fit rounded-lg bg-gray-400 text-white p-2'>fermer</button>) : (<button onClick={() => estChoisit()} className='w-fit rounded-lg bg-gray-700 text-white p-2'>fermer</button>)}

@@ -58,13 +58,13 @@ export default function Home() {
         <title>Chatting App - LogIn</title>
       </Head>
       <div className={`${style['corps']} bg-no-repeat w-screen h-screen font-sans flex flex-col justify-center items-center`}>
-        <div className={`${style['box']} w-1/3 h-2/3 flex flex-col justify-center items-center gap-16 p-2 rounded-2xl`}>
+        <div className={`${style['box']} w-5/6 h-2/4 lg:w-1/3 lg:h-2/3 flex flex-col justify-center items-center gap-16 p-2 rounded-2xl`}>
           <h2 className='text-3xl font-bold'>LogIn</h2>
           <input type="mail" className='w-70 h-7 rounded-xl border-0 p-2 bg-white text-black' placeholder="Votre mail" onChange={(e) => setMail(e.target.value)} />
           <input type="password" className='w-70 h-7 rounded-xl border-0 p-2 bg-white text-black' placeholder="Votre mot de passe" onChange={(e) => setPassword(e.target.value)} />
-          <div className='w-4/5 h-1/5 flex flex-row gap-3 justify-center items-center'>
-            <button onClick={() => connexion()} className={`${style['envoit']} w-36 h-10 rounded-xl bg-white text-black border-0`}><strong>Connexion</strong></button>
-            <button onClick={() => ajouterCompte()} className='w-36 h-10 rounded-xl bg-green-500 text-white border-0'><strong>Créer un compte</strong></button>
+          <div className='w-full lg:w-4/5 h-1/5 flex flex-row gap-3 justify-center items-center'>
+            <button onClick={() => connexion()} className={`${style['envoit']} w-38 lg:w-36 h-10 rounded-xl bg-white text-black border-0`}><strong>Connexion</strong></button>
+            <button onClick={() => ajouterCompte()} className='w-38 lg:w-36 h-10 rounded-xl bg-green-500 text-white border-0'><strong>Créer un compte</strong></button>
           </div>
         </div>
       </div>
