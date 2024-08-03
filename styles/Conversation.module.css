@@ -11,6 +11,6 @@
 .box p,
 .currentBox p {
     overflow-wrap: break-word;
-    width: 45%;
+    width: 40%;
     font-size: 14px;
 }

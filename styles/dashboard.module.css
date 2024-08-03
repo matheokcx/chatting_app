@@ -33,12 +33,12 @@
 }
 
 .addConv button {
-    width: 15%;
+    width: fit-content;
     height: 28px;
-    border-radius: 12px;
+    border-radius: 10px;
     background-color: white;
     border-width: 0;
-    padding: 5px;
+    padding: 3px;
     color: black;
     transition: 0.5s;
 }
@@ -76,7 +76,7 @@
 }
 
 .controls button {
-    width: 6%;
+    width: fit-content;
     height: 32px;
     background-color: white;
     border-radius: 12px;

@@ -10,7 +10,7 @@ export default function Dashboard() {
     const routeur = useRouter()
     const userMail = routeur.query.mail
 
-    const [modeNuit, setModeNuit] = useState(false)
+    const [modeNuit, setModeNuit] = useState(true)
 
     const [userConversations, setUserConversations] = useState([])
     const [conversationChoisit, setConversationChoisit] = useState(null)
@@ -96,6 +96,7 @@ export default function Dashboard() {
         })
 
         await fetchConversations()
+        setUtilisateurAajouter("")
     }
 
     return (
@@ -105,21 +106,21 @@ export default function Dashboard() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/icon.png" />
             </Head>
-            {modeNuit ? (<div className='bg-blue-950 w-screnn h-screen flex flex-row font-sans'>
-                <div className={`${style['conversations']} w-1/3 h-full bg-blue-800 flex flex-col items-center pt-6 overflow-hidden gap-4`}>
+            {modeNuit ? (<div className='bg-blue-950 w-screnn h-screen flex flex-col lg:flex-row font-sans'>
+                <div className={`${style['conversations']} w-full lg:w-1/3 h-1/3 lg:h-full bg-blue-800 flex flex-col items-center pt-6 overflow-y-scroll lg:overflow-hidden gap-4`}>
                     <div className={`${style['addConv']} w-full h-1/10 flex gap-4 p-4`}>
                         <input type="text" value={utilisateurAajouter} className='w-4/5 h-7 rounded-xl bg-white border-0 p-1 text-black' onChange={(e) => setUtilisateurAajouter(e.target.value)} placeholder="Nom d'utilisateur" />
                         <button onClick={() => ajouterConversation()}>Ajouter</button>
                     </div>
                     {userConversations.map((name, index) => (
-                        <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} modeNuit={modeNuit} otherName={userConversations[conversationChoisit]} />
+                        <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} modeNuit={modeNuit} otherName={userMail} />
                     ))}
-                    <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 absolute`}>
+                    <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 lg:absolute`}>
                         <Image src='/dayMode.png' alt='Mode nuit' width="50" height="50" onClick={() => setModeNuit(false)} />
-                        <button className={`${style['disconnectButton']} w-32 h-9 border-width rounded-xl border-0 bg-red-400 text-white`} onClick={() => deconnexion()}>LogOut</button>
+                        <button className={`${style['disconnectButton']} w-32 h-9 border-width rounded-xl border-0 bg-red-400 text-white`} onClick={() => deconnexion()}>Déconnexion</button>
                     </div>
                 </div>
-                <div className='w-4/6 h-full flex flex-col'>
+                <div className='w-full lg:w-4/6 h-2/3 lg:h-full flex flex-col'>
                     <div className='w-full h-5/6 flex flex-row p-4'>
                         <div className={`${style['otherSide']} w-1/2 h-full overflow-scroll overflow-x-hidden overflow-y-auto flex flex-col justify-left pl-1`}>{messagesAutre.map((text, index) => <p key={index} className='mt-4 bg-white w-fit text-black rounded-xl p-2'>{text} </p>)}</div>
                         <div className={`${style['userSide']} w-1/2 h-full overflow-scroll overflow-x-hidden overflow-y-auto flex flex-col`}>{messagesUtilisateur.map((value, index) => <p key={index} className='mt-4 bg-white w-fit text-black rounded-xl p-2'>{value} </p>)}</div>
@@ -131,8 +132,8 @@ export default function Dashboard() {
                 </div>
             </div>)
                 :
-                (<div className='bg-white w-screnn h-screen flex flex-row font-sans'>
-                    <div className={`${style['conversations2']} w-1/3 h-full bg-white flex flex-col items-center pt-6 overflow-hidden gap-4`}>
+                (<div className='bg-white w-screnn h-screen flex flex-col lg:flex-row font-sans'>
+                    <div className={`${style['conversations2']} w-full lg:w-1/3 h-1/3 lg:h-full bg-white flex flex-col items-center pt-6 overflow-y-scroll lg:overflow-hidden gap-4`}>
                         <div className={`${style['addConv']} w-full h-1/10 flex gap-4 p-4`}>
                             <input type="text" value={utilisateurAajouter} className='w-4/5 h-7 rounded-xl bg-white border-4 p-1 text-black' onChange={(e) => setUtilisateurAajouter(e.target.value)} placeholder="Nom d'utilisateur" />
                             <button onClick={() => ajouterConversation()}>Ajouter</button>
@@ -140,12 +141,12 @@ export default function Dashboard() {
                         {userConversations.map((name, index) => (
                             <Conversation key={index} userName={name} current={index === conversationChoisit} setCurrent={() => setConversationChoisit(index)} otherName={userMail} modeNuit={undefined} />
                         ))}
-                        <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 absolute`}>
+                        <div className={`${style['conversation_bottom']} h-1/10 w-full flex flex-row justify-center items-center gap-5 lg:absolute`}>
                             <Image src='/nightMode.png' alt='Mode nuit' onClick={() => setModeNuit(true)} width="50" height="50" />
-                            <button className={`${style['disconnectButton']} w-32 h-9 border-width rounded-xl border-0 bg-red-400 text-white`} onClick={() => deconnexion()}>LogOut</button>
+                            <button className={`${style['disconnectButton']} w-32 h-9 border-width rounded-xl border-0 bg-red-400 text-white`} onClick={() => deconnexion()}>Déconnexion</button>
                         </div>
                     </div>
-                    <div className='w-4/6 h-full flex flex-col'>
+                    <div className='w-full lg:w-4/6 h-2/3 lg:h-full flex flex-col'>
                         <div className='w-full h-5/6 flex flex-row p-4'>
                             <div className={`${style['otherSide']} w-1/2 h-full overflow-scroll overflow-x-hidden overflow-y-auto flex flex-col justify-left pl-1`}>{messagesAutre.map((text, index) => <p key={index} className='mt-4 bg-black w-fit text-white rounded-xl p-2'>{text} </p>)}</div>
                             <div className={`${style['userSide']} w-1/2 h-full overflow-scroll overflow-x-hidden overflow-y-auto flex flex-col`}>{messagesUtilisateur.map((value, index) => <p key={index} className='mt-4 bg-black w-fit text-white rounded-xl p-2'>{value} </p>)}</div>
